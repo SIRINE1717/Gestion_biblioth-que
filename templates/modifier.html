@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Modifier le livre</h2>
+<form method="POST" action="{{ url_for('modifier_livre', id=livre.id) }}" enctype="multipart/form-data">
+    <label>Titre :</label><br>
+    <input type="text" name="titre" value="{{ livre.titre }}" required><br><br>
+
+    <label>Auteur :</label><br>
+    <input type="text" name="auteur" value="{{ livre.auteur }}" required><br><br>
+
+    <label>Année :</label><br>
+    <input type="number" name="annee" value="{{ livre.annee }}" min="0" required><br><br>
+
+    <label>Nombre d'exemplaires :</label><br>
+    <input type="number" name="exemplaires" value="{{ livre.exemplaires }}" min="1" required><br><br>
+
+    <label>Image actuelle :</label><br>
+    {% if livre.image %}
+        <img src="{{ url_for('static', filename='images/' + livre.image) }}" width="100"><br><br>
+    {% endif %}
+
+    <label>Changer l'image :</label><br>
+    <input type="file" name="image" accept="image/*"><br><br>
+
+    <input type="submit" value="Modifier">
+</form>
+{% if message %}
+<p style="color: green;">{{ message }}</p>
+{% endif %}
+{% if erreur %}
+<p style="color: red;">{{ erreur }}</p>
+{% endif %}
+{% endblock %}
+

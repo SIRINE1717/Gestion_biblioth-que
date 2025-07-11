@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion Bibliothèque</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Gestion de Bibliothèque</h1>
+        <nav>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a> |
+            <a href="{{ url_for('ajouter_livre') }}">Ajouter Livre</a> |
+            <a href="{{ url_for('louer_livre') }}">Louer</a> |
+            <a href="{{ url_for('historique') }}">Historique</a> |
+            <a href="{{ url_for('accueil') }}">Déconnexion</a>
+        </nav>
+        <hr>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <hr>
+        <p>&copy; 2025 - Gestion Bibliothèque</p>
+    </footer>
+</body>
+</html>
+
