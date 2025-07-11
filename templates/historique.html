@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Historique des locations</h2>
+
+<table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+        <tr>
+            <th>ID Location</th>
+            <th>Livre</th>
+            <th>Locataire</th>
+            <th>Date de location</th>
+            <th>Date de retour</th>
+            <th>Statut</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for location in locations %}
+        <tr>
+            <td>{{ location.id }}</td>
+            <td>{{ location.titre_livre }}</td>
+            <td>{{ location.nom_locataire }}</td>
+            <td>{{ location.date_location }}</td>
+            <td>{{ location.date_retour }}</td>
+            <td>{{ location.statut }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% if not locations %}
+<p>Aucune location enregistrée.</p>
+{% endif %}
+{% endblock %}
