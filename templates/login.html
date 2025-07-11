@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background-image: url("BACK4.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+
+    .login-container {
+      width: 90%;
+      max-width: 360px;
+      background-color: #632a19;
+      border-radius: 25px;
+      padding: 3em;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+      text-align: center;
+    }
+
+    .logo {
+      margin-bottom: 20px;
+    }
+
+    .login-title {
+      font-size: 1.5em;
+      font-weight: 600;
+      margin-bottom: 1.5em;
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 1.5em;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 0.8em;
+      border: 1px solid #66533d;
+      border-radius: 30px;
+      background-color: #350101e3;
+      color: #fff;
+      font-size: 1em;
+      outline: none;
+    }
+
+    .input-group i {
+      position: absolute;
+      top: 50%;
+      left: 15px;
+      transform: translateY(-50%);
+      color: #a68f79;
+    }
+
+    .login-button {
+      background-color: #a67459;
+      color: #fff;
+      border: none;
+      padding: 0.8em;
+      width: 100%;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1em;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .login-button:hover {
+      background-color: #b38265;
+    }
+
+    .social-icons {
+      margin: 1.5em 0;
+    }
+
+    .social-icons i {
+      font-size: 1.4em;
+      margin: 0 10px;
+      color: #c5a88e;
+      cursor: pointer;
+    }
+
+    .links {
+      font-size: 0.9em;
+      margin-top: 1em;
+    }
+
+    .links a {
+      color: #b0f396;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+
+  <!-- Icônes Font Awesome -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="login-container">
+    <div class="logo">
+      <i class="fas fa-circle" style="font-size: 2em; color: #fff;"></i>
+    </div>
+    <div class="login-title">connectez-vous a votre application</div>
+
+    <form method="POST" action="/login">
+      <div class="input-group">
+        <i class="fas fa-envelope"></i>
+        <input type="id" name="id" placeholder="Identifiant " required />
+      </div>
+
+      <div class="input-group">
+        <i class="fas fa-lock"></i>
+        <input type="password" name="mot_de_passe" placeholder="Mot de passe" required />
+      </div>
+
+      <button type="submit" class="login-button">
+       se connecter <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
+      </button>
+    </form>
+
+    <div class="social-icons">
+      <i class="fab fa-facebook-f"></i>
+      <i class="fab fa-google"></i>
+      <i class="fab fa-instagram"></i>
+    </div>
+</body>
+</html>
