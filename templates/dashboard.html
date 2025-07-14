@@ -1,8 +1,234 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mes Livres</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 
-{% block content %}
-<h2>Bienvenue dans le Dashboard</h2>
-<p>Utilisez le menu pour gérer la bibliothèque.</p>
-<img src="{{ url_for('static', filename='images/library.jpg') }}" width="300" alt="Bibliothèque">
-{% endblock %}
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f0ec;
+      height: auto;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
+    .header {
+      background-color: #632a19;
+      color: white;
+      text-align: center;
+      padding: 1em;
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+
+    .book-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2em;
+      padding: 1em 2em;
+      padding-bottom: 7em; /* space for fixed bottom nav */
+    }
+
+    .book-card {
+      background-color: #301010;
+      border-radius: 20px;
+      padding: 0.7em;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+      cursor: pointer;
+    }
+
+    .book-card:hover {
+      transform: scale(1.02);
+    }
+
+    .book-image {
+      width: 100%;
+      height: 270px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 0.5em;
+    }
+
+    .book-title {
+      font-weight: bold;
+      font-size: 0.95em;
+      margin-bottom: 0.5em;
+      color: #f3e596;
+    }
+
+    .card-buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 4px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 6px;
+      border-radius: 8px;
+      font-size: 0.75em;
+      text-decoration: none;
+      font-weight: bold;
+      color: white;
+    }
+
+    .btn-louer {
+      background-color: #a67459;
+    }
+
+    .btn-modifier {
+      background-color: #704335;
+    }
+
+    .btn-supprimer {
+      background-color: #612d10;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #632a19;
+      display: flex;
+      justify-content: space-around;
+      padding: 0.8em 0;
+      z-index: 10;
+    }
+
+    .bottom-nav a {
+      color: #f3e596;
+      text-decoration: none;
+      font-size: 1.3em;
+    }
+
+    .bottom-nav a:hover {
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    📚 Ma Bibliothèque
+  </div>
+
+  <div class="book-grid">
+    <!-- Book Cards -->
+    <div class="book-card">
+      <img src="fant.jpg" alt="Harry Potter" class="book-image">
+      <div class="book-title">Harry Potter</div>
+      <div class="card-buttons">
+        <a href="#" class="btn btn-louer">Louer</a>
+        <a href="#" class="btn btn-modifier">Modifier</a>
+        <a href="#" class="btn btn-supprimer">Supprimer</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <img src="avent.jpg" alt="Voyage au centre de la Terre" class="book-image">
+      <div class="book-title">Voyage au centre de la Terre</div>
+      <div class="card-buttons">
+        <a href="#" class="btn btn-louer">Louer</a>
+        <a href="#" class="btn btn-modifier">Modifier</a>
+        <a href="#" class="btn btn-supprimer">Supprimer</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <img src="his.webp" alt="La Grande Histoire de l'Afrique" class="book-image">
+      <div class="book-title">La Grande Histoire de l'Afrique</div>
+      <div class="card-buttons">
+        <a href="#" class="btn btn-louer">Louer</a>
+        <a href="#" class="btn btn-modifier">Modifier</a>
+        <a href="#" class="btn btn-supprimer">Supprimer</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <img src="devpe.jpg" alt="Père riche, père pauvre" class="book-image">
+      <div class="book-title">Père riche, père pauvre</div>
+      <div class="card-buttons">
+        <a href="#" class="btn btn-louer">Louer</a>
+        <a href="#" class="btn btn-modifier">Modifier</a>
+        <a href="#" class="btn btn-supprimer">Supprimer</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <img src="psy.jpg" alt="Psychologie des foules" class="book-image">
+      <div class="book-title">Psychologie des foules</div>
+      <div class="card-buttons">
+        <a href="#" class="btn btn-louer">Louer</a>
+        <a href="#" class="btn btn-modifier">Modifier</a>
+        <a href="#" class="btn btn-supprimer">Supprimer</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <img src="spit2.jpg" alt="Les Quatre accords tolteques" class="book-image">
+      <div class="book-title">Les Quatre accords tolteques</div>
+      <div class="card-buttons">
+        <a href="#" class="btn btn-louer">Louer</a>
+        <a href="#" class="btn btn-modifier">Modifier</a>
+        <a href="#" class="btn btn-supprimer">Supprimer</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <img src="relg.jpeg" alt="Le Coran" class="book-image">
+      <div class="book-title">Le Coran</div>
+      <div class="card-buttons">
+        <a href="#" class="btn btn-louer">Louer</a>
+        <a href="#" class="btn btn-modifier">Modifier</a>
+        <a href="#" class="btn btn-supprimer">Supprimer</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <img src="info.webp" alt="Clean Code" class="book-image">
+      <div class="book-title">Clean Code</div>
+      <div class="card-buttons">
+        <a href="#" class="btn btn-louer">Louer</a>
+        <a href="#" class="btn btn-modifier">Modifier</a>
+        <a href="#" class="btn btn-supprimer">Supprimer</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <img src="art.jpg" alt="La Vie des arts" class="book-image">
+      <div class="book-title">La Vie des arts</div>
+      <div class="card-buttons">
+        <a href="#" class="btn btn-louer">Louer</a>
+        <a href="#" class="btn btn-modifier">Modifier</a>
+        <a href="#" class="btn btn-supprimer">Supprimer</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <img src="img1.png" alt="La Boîte à Merveille" class="book-image">
+      <div class="book-title">La Boîte à Merveille</div>
+      <div class="card-buttons">
+        <a href="#" class="btn btn-louer">Louer</a>
+        <a href="#" class="btn btn-modifier">Modifier</a>
+        <a href="#" class="btn btn-supprimer">Supprimer</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="#"><i class="fas fa-home"></i></a>
+    <a href="#"><i class="fas fa-plus"></i></a>
+    <a href="#"><i class="fas fa-book-open"></i></a>
+    <a href="#"><i class="fas fa-sign-out-alt"></i></a>
+  </div>
+
+</body>
+</html>
