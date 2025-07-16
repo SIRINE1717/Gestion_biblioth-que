@@ -89,7 +89,7 @@
     }
 
     .btn-supprimer {
-      background-color: #612d10;
+      background-color: #aa5c2e;
     }
 
     .bottom-nav {
@@ -123,12 +123,16 @@
   <div class="book-grid">
     <!-- Book Cards -->
     <div class="book-card">
-      <img src="fant.jpg" alt="Harry Potter" class="book-image">
+      <img src="static/images/fant.jpg" alt="Harry Potter" class="book-image">
       <div class="book-title">Harry Potter</div>
       <div class="card-buttons">
         <a href="#" class="btn btn-louer">Louer</a>
         <a href="#" class="btn btn-modifier">Modifier</a>
-        <a href="#" class="btn btn-supprimer">Supprimer</a>
+        <a href="/supprimer_livre/{{ livre.id }}"
+           class="btn btn-supprimer"
+           onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">
+           Supprimer
+        </a>
       </div>
     </div>
 
@@ -138,7 +142,11 @@
       <div class="card-buttons">
         <a href="#" class="btn btn-louer">Louer</a>
         <a href="#" class="btn btn-modifier">Modifier</a>
-        <a href="#" class="btn btn-supprimer">Supprimer</a>
+        <a href="/supprimer_livre/{{ livre.id }}"
+           class="btn btn-supprimer"
+           onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">
+           Supprimer
+        </a>
       </div>
     </div>
 
@@ -148,7 +156,11 @@
       <div class="card-buttons">
         <a href="#" class="btn btn-louer">Louer</a>
         <a href="#" class="btn btn-modifier">Modifier</a>
-        <a href="#" class="btn btn-supprimer">Supprimer</a>
+        <a href="/supprimer_livre/{{ livre.id }}"
+           class="btn btn-supprimer"
+           onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">
+           Supprimer
+        </a>
       </div>
     </div>
 
@@ -158,7 +170,11 @@
       <div class="card-buttons">
         <a href="#" class="btn btn-louer">Louer</a>
         <a href="#" class="btn btn-modifier">Modifier</a>
-        <a href="#" class="btn btn-supprimer">Supprimer</a>
+        <a href="/supprimer_livre/{{ livre.id }}"
+           class="btn btn-supprimer"
+           onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">
+           Supprimer
+        </a>
       </div>
     </div>
 
@@ -168,7 +184,11 @@
       <div class="card-buttons">
         <a href="#" class="btn btn-louer">Louer</a>
         <a href="#" class="btn btn-modifier">Modifier</a>
-        <a href="#" class="btn btn-supprimer">Supprimer</a>
+        <a href="/supprimer_livre/{{ livre.id }}"
+           class="btn btn-supprimer"
+           onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">
+           Supprimer
+        </a>
       </div>
     </div>
 
@@ -178,17 +198,25 @@
       <div class="card-buttons">
         <a href="#" class="btn btn-louer">Louer</a>
         <a href="#" class="btn btn-modifier">Modifier</a>
-        <a href="#" class="btn btn-supprimer">Supprimer</a>
+        <a href="/supprimer_livre/{{ livre.id }}"
+           class="btn btn-supprimer"
+           onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">
+           Supprimer
+        </a>
       </div>
     </div>
 
     <div class="book-card">
-      <img src="relg.jpeg" alt="Le Coran" class="book-image">
+      <img src="img1.jpeg" alt="Le Coran" class="book-image">
       <div class="book-title">Le Coran</div>
       <div class="card-buttons">
         <a href="#" class="btn btn-louer">Louer</a>
         <a href="#" class="btn btn-modifier">Modifier</a>
-        <a href="#" class="btn btn-supprimer">Supprimer</a>
+        <a href="#" class="btn btn-supprimer">Supprimer</a><a href="/supprimer_livre/{{ livre.id }}"
+           class="btn btn-supprimer"
+           onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">
+           Supprimer
+        </a>
       </div>
     </div>
 
@@ -198,7 +226,11 @@
       <div class="card-buttons">
         <a href="#" class="btn btn-louer">Louer</a>
         <a href="#" class="btn btn-modifier">Modifier</a>
-        <a href="#" class="btn btn-supprimer">Supprimer</a>
+        <a href="/supprimer_livre/{{ livre.id }}"
+           class="btn btn-supprimer"
+           onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">
+           Supprimer
+        </a>
       </div>
     </div>
 
@@ -208,7 +240,11 @@
       <div class="card-buttons">
         <a href="#" class="btn btn-louer">Louer</a>
         <a href="#" class="btn btn-modifier">Modifier</a>
-        <a href="#" class="btn btn-supprimer">Supprimer</a>
+        <a href="/supprimer_livre/{{ livre.id }}"
+           class="btn btn-supprimer"
+           onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">
+           Supprimer
+        </a>
       </div>
     </div>
 
@@ -218,8 +254,23 @@
       <div class="card-buttons">
         <a href="#" class="btn btn-louer">Louer</a>
         <a href="#" class="btn btn-modifier">Modifier</a>
-        <a href="#" class="btn btn-supprimer">Supprimer</a>
+        <a href="/supprimer_livre/{{ livre.id }}"
+           class="btn btn-supprimer"
+           onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">
+           Supprimer
+        </a>
       </div>
+    </div>
+  
+    <div class="book-card">
+    <img src="sap.jpg" alt="b11" class="book-image">
+    <div class="book-title">sapien</div>
+    
+    <div class="card-buttons">
+      <a href="/louer/{{ livre.id }}" class="btn btn-louer">Louer</a>
+      <a href="/modifier_livre/{{ livre.id }}" class="btn btn-modifier">Modifier</a>
+      <a href="/supprimer_livre/{{ livre.id }}" class="btn btn-supprimer"
+         onclick="return confirm('Confirmer la suppression ?')">Supprimer</a>
     </div>
   </div>
 

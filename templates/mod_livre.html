@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Ajouter un Livre</title>
+  <title>Modifier un Livre</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <style>
     body {
@@ -95,25 +95,24 @@
 <body>
 
   <div class="container">
-    <h2>Ajouter un Nouveau Livre</h2>
+    <h2>Modifier un Livre</h2>
 
-    <form action="/ajouter_livre" method="post" enctype="multipart/form-data">
+    <form action="/modifier_livre" method="post" enctype="multipart/form-data">
 
       <label for="titre">Titre :</label>
-      <input type="text" id="titre" name="titre" placeholder="Ex: Le Petit Prince" required>
+      <input type="text" id="titre" name="titre" value="Titre actuel">
 
       <label for="auteur">Auteur :</label>
-      <input type="text" id="auteur" name="auteur" placeholder="Ex: Antoine de Saint-Exupéry" required>
+      <input type="text" id="auteur" name="auteur" value="Nom actuel">
 
       <label for="annee_ecriture">Année d’écriture :</label>
-      <input type="number" id="annee_ecriture" name="annee_ecriture" min="0" placeholder="Ex: 1943" required>
+      <input type="number" id="annee_ecriture" name="annee_ecriture" min="0" value="2000">
 
       <label for="annee_publication">Année de publication :</label>
-      <input type="number" id="annee_publication" name="annee_publication" min="0" placeholder="Ex: 1943" required>
+      <input type="number" id="annee_publication" name="annee_publication" min="0" value="2005">
 
       <label for="categorie">Catégorie :</label>
-      <select id="categorie" name="categorie" required>
-        <option value="">-- Choisir une catégorie --</option>
+      <select id="categorie" name="categorie">
         <option>Roman</option>
         <option>Fantastique</option>
         <option>Histoire</option>
@@ -127,15 +126,15 @@
       </select>
 
       <label for="description">Description :</label>
-      <textarea id="description" name="description" placeholder="Résumé ou description du livre..." required></textarea>
+      <textarea id="description" name="description">Description actuelle du livre...</textarea>
 
       <label for="prix">Prix (DH) :</label>
-      <input type="number" id="prix" name="prix" min="0" step="0.01" placeholder="Ex: 79.99" required>
+      <input type="number" id="prix" name="prix" min="0" step="0.01" value="99.99">
 
-      <label for="image">Image de couverture :</label>
-      <input type="file" id="image" name="image" required>
+      <label for="image">Changer l’image :</label>
+      <input type="file" id="image" name="image">
 
-      <button type="submit" class="btn">Ajouter le Livre</button>
+      <button type="submit" class="btn">Enregistrer les modifications</button>
     </form>
 
     <div class="back-link">
