@@ -38,10 +38,10 @@ def login():
 
     return render_template('login.html')
 
-@app.route('/dashboard')
+@app.route('/dashbrd')
 def dashboard():
     if 'user' not in session:
-        flash('Veuillez vous connecter.', 'warning')
+        flash('Veuilloaez vous connecter.', 'warning')
         return redirect(url_for('login'))
     return render_template('dashboard.html')
 

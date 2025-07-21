@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Louer un livre</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #3a170b;
+      padding: 40px;
+      margin: 0;
+      color: #ffffff;
+    }
+
+    .form-container {
+      max-width: 600px;
+      margin: auto;
+      background: #632a19;
+      padding: 3em;
+      border-radius: 16px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    }
+
+    h2 {
+      text-align: center;
+      color: #f4e3c1;
+      margin-bottom: 1.5em;
+    }
+
+    .form-group {
+      margin-bottom: 1.2em;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5em;
+      color: #f2d9b6;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.75em 1em;
+      border: 1px solid #a1744b;
+      border-radius: 10px;
+      background-color: #350101e3;
+      color: #fff;
+      font-size: 1em;
+      outline: none;
+    }
+
+    .form-group input::placeholder {
+      color: #d6bfa3;
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2em;
+    }
+
+    .form-actions button {
+      width: 48%;
+      padding: 0.9em;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-submit {
+      background-color: #a67459;
+      color: #fff;
+    }
+
+    .btn-submit:hover {
+      background-color: #b8856b;
+    }
+
+    .btn-reset {
+      background-color: #7b4f3c;
+      color: #fff;
+    }
+
+    .btn-reset:hover {
+      background-color: #944c36;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Location d’un livre</h2>
+  <form method="POST" action="{{ url_for('louer') }}">
+
+      <div class="form-group">
+        <label for="nom_client">Nom du client</label>
+        <input type="text" name="nom_client" id="nom_client" placeholder="Ex: Ahmed Benali" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email_client">Email</label>
+        <input type="email" name="email_client" id="email_client" placeholder="Ex: ahmed@gmail.com">
+      </div>
+
+      <div class="form-group">
+        <label for="tel_client">Téléphone</label>
+        <input type="text" name="tel_client" id="tel_client" placeholder="Ex: 06 12 34 56 78">
+      </div>
+
+      <div class="form-group">
+        <label for="date_location">Date de location</label>
+        <input type="date" name="date_location" id="date_location" required>
+      </div>
+
+      <div class="form-group">
+        <label for="date_retour">Date de retour</label>
+        <input type="date" name="date_retour" id="date_retour" required>
+      </div>
+
+      <div class="form-group">
+        <label for="prix_location">Prix de location (DH)</label>
+        <input type="number" step="0.01" name="prix_location" id="prix_location" placeholder="Ex: 25.00" required>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn-submit">Sauvegarder</button>
+        <button type="reset" class="btn-reset">Annuler</button>
+      </div>
+    </form>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Reçu de Location</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #2e1b0e; /* couleur bibliothèque foncée */
+      color: #fff;
+      margin: 0;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 450px;       /* moins large */
+      margin: auto;
+      background-color: #5c3d1f; /* brun clair, assorti */
+      color: #f5f1e9;
+      padding: 30px 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    h1 {
+      color: #d6bfa3;
+      margin-bottom: 25px;
+      font-weight: 600;
+    }
+
+    p {
+      margin: 12px 0;
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-style: italic;
+      color: #d6bfa3;
+    }
+
+    .btn-download {
+      margin: 30px auto 0;
+      padding: 12px 28px;
+      background-color: #a67459;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      display: inline-block;
+    }
+
+    .btn-download:hover {
+      background-color: #b8856b;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="recu">
+    <h1>Reçu de Location</h1>
+    <p><strong>Nom de l'emprunteur :</strong> Ahmed Benyahia</p>
+    <p><strong>Livre :</strong> Le Petit Prince — Antoine de Saint-Exupéry</p>
+    <p><strong>Date de location :</strong> 21 juillet 2025</p>
+    <p><strong>Date de retour prévue :</strong> 28 juillet 2025</p>
+
+    <div class="footer">
+      Merci pour votre confiance.
+    </div>
+  </div>
+
+  <button class="btn-download" onclick="telecharger()">📥 Télécharger le reçu</button>
+
+  <script>
+    function telecharger() {
+      const recuText = document.getElementById("recu").innerText;
+      const blob = new Blob([recuText], { type: "text/plain" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "recu_location.txt";
+      link.click();
+    }
+  </script>
+
+</body>
+</html>
