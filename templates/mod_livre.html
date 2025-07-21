@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Modifier un Livre</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #3e261d;
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background-color: #2b1b14;
+      padding: 2em;
+      border-radius: 25px;
+      width: 90%;
+      max-width: 600px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1.5em;
+      color: #f3e596;
+    }
+
+    label {
+      display: block;
+      margin-top: 1em;
+      margin-bottom: 0.4em;
+      color: #e6d2b5;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="file"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.7em;
+      border: none;
+      border-radius: 15px;
+      background-color: #3b291f;
+      color: #fff;
+      font-size: 1em;
+      margin-bottom: 0.8em;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .btn {
+      background-color: #a67459;
+      color: white;
+      padding: 0.9em;
+      border: none;
+      border-radius: 20px;
+      width: 100%;
+      font-weight: bold;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-top: 1em;
+    }
+
+    .btn:hover {
+      background-color: #b27b5f;
+    }
+
+    .back-link {
+      text-align: center;
+      margin-top: 1.2em;
+    }
+
+    .back-link a {
+      color: #b0f396;
+      text-decoration: none;
+    }
+
+    .back-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Modifier un Livre</h2>
+
+    <form action="/modifier_livre" method="post" enctype="multipart/form-data">
+
+      <label for="titre">Titre :</label>
+      <input type="text" id="titre" name="titre" value="Titre actuel">
+
+      <label for="auteur">Auteur :</label>
+      <input type="text" id="auteur" name="auteur" value="Nom actuel">
+
+      <label for="annee_ecriture">Année d’écriture :</label>
+      <input type="number" id="annee_ecriture" name="annee_ecriture" min="0" value="2000">
+
+      <label for="annee_publication">Année de publication :</label>
+      <input type="number" id="annee_publication" name="annee_publication" min="0" value="2005">
+
+      <label for="categorie">Catégorie :</label>
+      <select id="categorie" name="categorie">
+        <option>Roman</option>
+        <option>Fantastique</option>
+        <option>Histoire</option>
+        <option>Développement personnel</option>
+        <option>Religieux</option>
+        <option>Psychologie</option>
+        <option>Informatique</option>
+        <option>Art</option>
+        <option>Poésie</option>
+        <option>Science</option>
+      </select>
+
+      <label for="description">Description :</label>
+      <textarea id="description" name="description">Description actuelle du livre...</textarea>
+
+      <label for="prix">Prix (DH) :</label>
+      <input type="number" id="prix" name="prix" min="0" step="0.01" value="99.99">
+
+      <label for="image">Changer l’image :</label>
+      <input type="file" id="image" name="image">
+
+      <button type="submit" class="btn">Enregistrer les modifications</button>
+    </form>
+
+    <div class="back-link">
+      <a href="/dashboard">⬅ Retour au tableau de bord</a>
+    </div>
+  </div>
+
+</body>
+</html>

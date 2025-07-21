@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Modifier un Livre</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f5eab0;
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background-color: #632a19;
+      padding: 2em;
+      border-radius: 25px;
+      width: 90%;
+      max-width: 600px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1.5em;
+      color: #f5eab0;
+    }
+
+    label {
+      display: block;
+      margin-top: 1em;
+      margin-bottom: 0.4em;
+      color: #201505;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="file"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.7em;
+      border: none;
+      border-radius: 15px;
+      background-color: #f5eab0;
+      color: #290909;
+      font-size: 1em;
+      margin-bottom: 0.8em;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .btn {
+      background-color: #f5eab0;
+      color: rgba(54, 6, 6, 0.897);
+      padding: 0.9em;
+      border: none;
+      border-radius: 20px;
+      width: 100%;
+      font-weight: bold;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-top: 1em;
+    }
+
+    .btn:hover {
+      background-color: #b27b5f;
+    }
+
+    .back-link {
+      text-align: center;
+      margin-top: 1.2em;
+    }
+
+    .back-link a {
+      color: #f5eab0;
+      text-decoration: none;
+    }
+
+    .back-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Modifier le livre :</h2>
+
+<form method="post" action="{{ url_for('valider_modification', id=livre.ID_LIVRE) }}" enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="titre">Titre</label>
+    <input type="text" name="titre" id="titre" placeholder="TITRE" required>
+     
+
+  </div>
+
+  <div class="form-group">
+    <label for="auteur">Auteur</label>
+    <input type="text" name="auteur" id="auteur" placeholder="AUTEUR" required>
+  </div>
+
+  <div class="form-group">
+     <label for="annee_ecriture">Année d’écriture :</label>
+      <input type="number" id="annee_ecriture" name="annee_ecriture" min="1000" value="2000">
+  </div>
+
+  <div class="form-group">
+   <label for="annee_publication">Année de publication :</label>
+      <input type="number" id="annee_publication" name="annee_publication" min="1000" value="2005">
+
+  </div>
+
+  <div class="form-group">
+    <label for="categorie">Catégorie</label>
+    <select name="categorie" id="categorie">
+      <option value="Roman" {% if livre.CATEGORIE == 'Roman' %}selected{% endif %}>Roman</option>
+      <option value="Fantastique" {% if livre.CATEGORIE == 'Fantastique' %}selected{% endif %}>Fantastique</option>
+      <option value="Histoire" {% if livre.CATEGORIE == 'Histoire' %}selected{% endif %}>Histoire</option>
+      <option value="Développement personnel" {% if livre.CATEGORIE == 'Développement personnel' %}selected{% endif %}>Développement personnel</option>
+      <option value="Religieux" {% if livre.CATEGORIE == 'Religieux' %}selected{% endif %}>Religieux</option>
+      <option value="Psychologie" {% if livre.CATEGORIE == 'Psychologie' %}selected{% endif %}>Psychologie</option>
+      <option value="Informatique" {% if livre.CATEGORIE == 'Informatique' %}selected{% endif %}>Informatique</option>
+      <option value="Art" {% if livre.CATEGORIE == 'Art' %}selected{% endif %}>Art</option>
+      <option value="Poésie" {% if livre.CATEGORIE == 'Poésie' %}selected{% endif %}>Poésie</option>
+      <option value="Science" {% if livre.CATEGORIE == 'Science' %}selected{% endif %}>Science</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="description">Description :</label>
+      <textarea id="description" name="description" placeholder="Résumé ou description du livre..." required></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="prix">Prix</label>
+    <input type="number" step="0.01" name="prix" id="prix" min="10" value="100" placeholder=".PRIX ">
+    
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn">Enregistrer les modifications</button>
+    </div>
+
+
+    <div style="text-align: center;">
+      <a class="retour" href="{{ url_for('dashboard') }}">← Retour au tableau de bord</a>
+    </div>
+  </div>
+
+</body>
+</html>
