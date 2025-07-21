@@ -10,7 +10,7 @@
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
-  background-image: url("BACK4.jpeg");
+  background-image: url("{{ url_for('static', filename='BACK4.jpeg') }}");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -123,7 +123,7 @@
     <form method="POST" action="/login">
       <div class="input-group">
         <i class="fas fa-envelope"></i>
-        <input type="id" name="id" placeholder="Identifiant " required />
+        <input type="text" name="Identifiant" placeholder="Identifiant " required />
       </div>
 
       <div class="input-group">

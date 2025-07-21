@@ -98,7 +98,7 @@
   <div class="container">
     <h2>Modifier le livre :</h2>
 
-<form method="post" action="{{ url_for('valider_modification', id=livre.ID_LIVRE) }}" enctype="multipart/form-data">
+  <form method="post" action="{{ url_for('modifier_livre', id=livre.ID_LIVRE) }}" enctype="multipart/form-data">
   <div class="form-group">
     <label for="titre">Titre</label>
     <input type="text" name="titre" id="titre" placeholder="TITRE" required>

@@ -117,163 +117,44 @@
 <body>
 
   <div class="header">
-    📚 Ma Bibliothèque
+  <!-- Icône de notification à gauche -->
+  <div class="header-icon-left">
+    <i class="fas fa-bell" onclick="toggleNotifications()"></i>
+      <a href="/ajouter_livre" class="ajouter-btn">Ajouter</a>
   </div>
+
+  <!-- Titre centré -->
+  📚 Ma Bibliothèque
+
+  <!-- Icône de recherche à droite -->
+  <div class="header-icon-right">
+    <i class="fas fa-search" onclick="toggleSearch()"></i>
+  </div>
+</div>
+<!-- Barre de recherche cachée -->
+<div id="searchBar" class="search-bar" style="display: none;">
+  <form action="/rechercher" method="get">
+    <input type="text" name="q" placeholder="Rechercher un livre..." required>
+    <button type="submit"><i class="fas fa-search"></i></button>
+  </form>
+</div>
 
   <div class="book-grid">
-    <!-- Book Cards -->
-    <div class="book-card">
-      <img src="static/images/fant.jpg" alt="Harry Potter" class="book-image">
-      <div class="book-title">Harry Potter</div>
-      <div class="card-buttons">
-        <a href="#" class="btn btn-louer">Louer</a>
-        <a href="#" class="btn btn-modifier">Modifier</a>
-        <a href="/supprimer_livre/{{ livre.id }}"
-           class="btn btn-supprimer"
-           onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">
-           Supprimer
-        </a>
-      </div>
-    </div>
-
-    <div class="book-card">
-      <img src="avent.jpg" alt="Voyage au centre de la Terre" class="book-image">
-      <div class="book-title">Voyage au centre de la Terre</div>
-      <div class="card-buttons">
-        <a href="#" class="btn btn-louer">Louer</a>
-        <a href="#" class="btn btn-modifier">Modifier</a>
-        <a href="/supprimer_livre/{{ livre.id }}"
-           class="btn btn-supprimer"
-           onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">
-           Supprimer
-        </a>
-      </div>
-    </div>
-
-    <div class="book-card">
-      <img src="his.webp" alt="La Grande Histoire de l'Afrique" class="book-image">
-      <div class="book-title">La Grande Histoire de l'Afrique</div>
-      <div class="card-buttons">
-        <a href="#" class="btn btn-louer">Louer</a>
-        <a href="#" class="btn btn-modifier">Modifier</a>
-        <a href="/supprimer_livre/{{ livre.id }}"
-           class="btn btn-supprimer"
-           onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">
-           Supprimer
-        </a>
-      </div>
-    </div>
-
-    <div class="book-card">
-      <img src="devpe.jpg" alt="Père riche, père pauvre" class="book-image">
-      <div class="book-title">Père riche, père pauvre</div>
-      <div class="card-buttons">
-        <a href="#" class="btn btn-louer">Louer</a>
-        <a href="#" class="btn btn-modifier">Modifier</a>
-        <a href="/supprimer_livre/{{ livre.id }}"
-           class="btn btn-supprimer"
-           onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">
-           Supprimer
-        </a>
-      </div>
-    </div>
-
-    <div class="book-card">
-      <img src="psy.jpg" alt="Psychologie des foules" class="book-image">
-      <div class="book-title">Psychologie des foules</div>
-      <div class="card-buttons">
-        <a href="#" class="btn btn-louer">Louer</a>
-        <a href="#" class="btn btn-modifier">Modifier</a>
-        <a href="/supprimer_livre/{{ livre.id }}"
-           class="btn btn-supprimer"
-           onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">
-           Supprimer
-        </a>
-      </div>
-    </div>
-
-    <div class="book-card">
-      <img src="spit2.jpg" alt="Les Quatre accords tolteques" class="book-image">
-      <div class="book-title">Les Quatre accords tolteques</div>
-      <div class="card-buttons">
-        <a href="#" class="btn btn-louer">Louer</a>
-        <a href="#" class="btn btn-modifier">Modifier</a>
-        <a href="/supprimer_livre/{{ livre.id }}"
-           class="btn btn-supprimer"
-           onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">
-           Supprimer
-        </a>
-      </div>
-    </div>
-
-    <div class="book-card">
-      <img src="img1.jpeg" alt="Le Coran" class="book-image">
-      <div class="book-title">Le Coran</div>
-      <div class="card-buttons">
-        <a href="#" class="btn btn-louer">Louer</a>
-        <a href="#" class="btn btn-modifier">Modifier</a>
-        <a href="#" class="btn btn-supprimer">Supprimer</a><a href="/supprimer_livre/{{ livre.id }}"
-           class="btn btn-supprimer"
-           onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">
-           Supprimer
-        </a>
-      </div>
-    </div>
-
-    <div class="book-card">
-      <img src="info.webp" alt="Clean Code" class="book-image">
-      <div class="book-title">Clean Code</div>
-      <div class="card-buttons">
-        <a href="#" class="btn btn-louer">Louer</a>
-        <a href="#" class="btn btn-modifier">Modifier</a>
-        <a href="/supprimer_livre/{{ livre.id }}"
-           class="btn btn-supprimer"
-           onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">
-           Supprimer
-        </a>
-      </div>
-    </div>
-
-    <div class="book-card">
-      <img src="art.jpg" alt="La Vie des arts" class="book-image">
-      <div class="book-title">La Vie des arts</div>
-      <div class="card-buttons">
-        <a href="#" class="btn btn-louer">Louer</a>
-        <a href="#" class="btn btn-modifier">Modifier</a>
-        <a href="/supprimer_livre/{{ livre.id }}"
-           class="btn btn-supprimer"
-           onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">
-           Supprimer
-        </a>
-      </div>
-    </div>
-
-    <div class="book-card">
-      <img src="img1.png" alt="La Boîte à Merveille" class="book-image">
-      <div class="book-title">La Boîte à Merveille</div>
-      <div class="card-buttons">
-        <a href="#" class="btn btn-louer">Louer</a>
-        <a href="#" class="btn btn-modifier">Modifier</a>
-        <a href="/supprimer_livre/{{ livre.id }}"
-           class="btn btn-supprimer"
-           onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">
-           Supprimer
-        </a>
-      </div>
-    </div>
-  
-    <div class="book-card">
-    <img src="sap.jpg" alt="b11" class="book-image">
-    <div class="book-title">sapien</div>
-    
+  {% for livre in livres %}
+  <div class="book-card">
+    <img src="{{ url_for('static', filename='images/' ~ livre.PHOTO) }}" alt="{{ livre.TITRE }}" class="book-image">
+    <div class="book-title">{{ livre.TITRE }}</div>
     <div class="card-buttons">
-      <a href="/louer/{{ livre.id }}" class="btn btn-louer">Louer</a>
-      <a href="/modifier_livre/{{ livre.id }}" class="btn btn-modifier">Modifier</a>
-      <a href="/supprimer_livre/{{ livre.id }}" class="btn btn-supprimer"
-         onclick="return confirm('Confirmer la suppression ?')">Supprimer</a>
+      <a href="/louer/{{ livre.ID_LIVRE }}" class="btn btn-louer">Louer</a>
+      <a href="/modifier_livre/{{ livre.ID_LIVRE }}" class="btn btn-modifier">Modifier</a>
+      <a href="/supprimer_livre/{{ livre.ID_LIVRE }}" class="btn btn-supprimer"
+         onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">
+         Supprimer
+      </a>
     </div>
   </div>
-
+  {% endfor %}
+</div>
   <div class="bottom-nav">
     <a href="#"><i class="fas fa-home"></i></a>
     <a href="#"><i class="fas fa-plus"></i></a>

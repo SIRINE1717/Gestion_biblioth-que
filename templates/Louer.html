@@ -93,7 +93,8 @@
 
   <div class="form-container">
     <h2>Location d’un livre</h2>
-  <form method="POST" action="{{ url_for('louer') }}">
+  <form method="POST" action="{{ url_for('louer_livre', id=livre.ID_LIVRE) }}">
+
 
       <div class="form-group">
         <label for="nom_client">Nom du client</label>
