@@ -1,166 +1,284 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mes Livres</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mes livres</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet.css" />
   <style>
-    html, body {
-      margin: 0;
+    * {
+      box-sizing: border-box;
       padding: 0;
-      font-family: 'Poppins', sans-serif;
-      background-color: #f4f0ec;
-      height: auto;
-      min-height: 100vh;
-      overflow-x: hidden;
+      margin: 0;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #F2E5D0;
+      display: flex;
     }
 
-    .header {
-      background-color: #632a19;
-      color: white;
-      text-align: center;
-      padding: 1em;
-      font-size: 1.5em;
+    .sidebar {
+      width: 220px;
+      background-color: #F8F2E5;
+      padding: 2em 1em;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      height: 100vh;
+      border-top-right-radius: 30px;
+      border-bottom-right-radius: 30px;
+    }
+
+    .sidebar .logo {
+      font-size: 1.8em;
       font-weight: bold;
+      color: #7B553A;
+      margin-bottom: 1em;
     }
 
-    .book-grid {
+    .sidebar a {
+      text-decoration: none;
+      color: #7B553A;
+      font-weight: 500;
+      padding: 0.7em 1em;
+      border-radius: 12px;
+      transition: background 0.2s;
+    }
+
+    .sidebar a:hover, .sidebar a.active {
+      background-color: #F6C27C;
+    }
+    .main {
+      flex: 1;
+      padding: 2em 3em;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 1em 1.2em;
+      border-radius: 14px;
+      border: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      font-size: 16px;
+      margin-bottom: 2em;
+    }
+
+    .categories {
+      display: flex;
+      gap: 1em;
+      margin-bottom: 2em;
+      flex-wrap: wrap;
+    }
+
+    .category {
+      padding: 0.6em 1.4em;
+      background-color: white;
+      border-radius: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .category.active {
+      background: #FCA72C;
+      color: white;
+    }
+
+    .books-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.2em;
-      padding: 1em 2em;
-      padding-bottom: 7em; /* space for fixed bottom nav */
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 2.2em;
     }
 
     .book-card {
-      background-color: #301010;
+      position: relative;
+      background: white;
       border-radius: 20px;
-      padding: 0.7em;
-      text-align: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      transition: transform 0.2s ease;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      padding: 1em;
+      perspective: 1200px;
+      transform-style: preserve-3d;
+      transition: transform 0.4s ease, box-shadow 0.4s;
       cursor: pointer;
     }
 
     .book-card:hover {
+      transform: rotateY(6deg) rotateX(2deg) scale(1.03);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .book-image-wrapper {
+      width: 100%;
+      height: 240px;
+      background: #eee;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: inset -5px 0 10px rgba(0,0,0,0.05);
+    }
+
+    .book-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       transform: scale(1.02);
     }
 
-    .book-image {
-      width: 100%;
-      height: 270px;
-      object-fit: cover;
-      border-radius: 12px;
-      margin-bottom: 0.5em;
+    .book-title {
+      margin-top: 1em;
+      font-weight: 700;
+      font-size: 1rem;
+      text-align: center;
+      color: #333;
     }
 
-    .book-title {
-      font-weight: bold;
-      font-size: 0.95em;
-      margin-bottom: 0.5em;
-      color: #f3e596;
+    .book-actions {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .book-card:hover .book-actions {
+      opacity: 1;
+    }
+
+    .book-actions button {
+      padding: 0.5em 1em;
+      background-color: #FCA72C;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .book-actions button:hover {
+      background-color: #d38710;
+    }
+
+    /* Added btn classes from your boucle */
+    .btn {
+      display: inline-block;
+      padding: 0.4em 0.8em;
+      border-radius: 6px;
+      color: white;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-decoration: none;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      transition: background 0.3s;
+      margin: 0 0 0.5em 0;
+      text-align: center;
+    }
+
+    .btn-louer {
+      background-color: #FCA72C;
+    }
+
+    .btn-louer:hover {
+      background-color: #d38710;
+    }
+
+    .btn-modifier {
+      background-color: #7B553A;
+    }
+
+    .btn-modifier:hover {
+      background-color: #5b3e29;
+    }
+
+    .btn-supprimer {
+      background-color: #cc4b37;
+    }
+
+    .btn-supprimer:hover {
+      background-color: #a63926;
     }
 
     .card-buttons {
       display: flex;
-      justify-content: space-between;
-      gap: 4px;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 1em;
     }
+    .btn-icon {
+  width: 36px;
+  height: 36px;
+  background-color: #FCA72C;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  transition: background 0.3s;
+}
 
-    .btn {
-      flex: 1;
-      padding: 6px;
-      border-radius: 8px;
-      font-size: 0.75em;
-      text-decoration: none;
-      font-weight: bold;
-      color: white;
-    }
+.btn-icon:hover {
+  background-color: #d38710;
+}
 
-    .btn-louer {
-      background-color: #a67459;
-    }
+.btn-icon svg {
+  pointer-events: none;
+}
 
-    .btn-modifier {
-      background-color: #704335;
-    }
-
-    .btn-supprimer {
-      background-color: #aa5c2e;
-    }
-
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      background-color: #632a19;
-      display: flex;
-      justify-content: space-around;
-      padding: 0.8em 0;
-      z-index: 10;
-    }
-
-    .bottom-nav a {
-      color: #f3e596;
-      text-decoration: none;
-      font-size: 1.3em;
-    }
-
-    .bottom-nav a:hover {
-      color: white;
-    }
   </style>
 </head>
 <body>
-
-  <div class="header">
-  <!-- Icône de notification à gauche -->
-  <div class="header-icon-left">
-    <i class="fas fa-bell" onclick="toggleNotifications()"></i>
-      <a href="/ajouter_livre" class="ajouter-btn">Ajouter</a>
+  <div class="sidebar">
+    <div class="logo">📘 bibliothèque</div>
+    <a class="active" href="#">Accueil</a>
+    <a href="#">Notifications</a>
+    <a href="Ajouter.html">Ajouter</a>
+    <a href="#">Historique</a>
+    <a href="/logout">Déconnecter</a>
   </div>
-
-  <!-- Titre centré -->
-  📚 Ma Bibliothèque
-
-  <!-- Icône de recherche à droite -->
-  <div class="header-icon-right">
-    <i class="fas fa-search" onclick="toggleSearch()"></i>
-  </div>
-</div>
-<!-- Barre de recherche cachée -->
-<div id="searchBar" class="search-bar" style="display: none;">
-  <form action="/rechercher" method="get">
-    <input type="text" name="q" placeholder="Rechercher un livre..." required>
-    <button type="submit"><i class="fas fa-search"></i></button>
-  </form>
-</div>
-
-  <div class="book-grid">
+  <div class="main">
+    <div class="search-bar">
+      <input type="text" placeholder="Search books..." />
+    </div>
+    <div class="books-grid">
   {% for livre in livres %}
   <div class="book-card">
-    <img src="{{ url_for('static', filename='images/' ~ livre.PHOTO) }}" alt="{{ livre.TITRE }}" class="book-image">
-    <div class="book-title">{{ livre.TITRE }}</div>
-    <div class="card-buttons">
-      <a href="/louer/{{ livre.ID_LIVRE }}" class="btn btn-louer">Louer</a>
-      <a href="/modifier_livre/{{ livre.ID_LIVRE }}" class="btn btn-modifier">Modifier</a>
-      <a href="/supprimer_livre/{{ livre.ID_LIVRE }}" class="btn btn-supprimer"
+    <div class="book-actions" style="display: flex; flex-direction: row; gap: 10px; position: absolute; top: 12px; right: 12px;">
+      <a href="/louer/{{ livre.ID_LIVRE }}" class="btn-icon" title="Louer">
+        <!-- Rent Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="white" viewBox="0 0 16 16">
+          <path d="M3 2a1 1 0 0 0-1 1v1h12V3a1 1 0 0 0-1-1H3zm-1 4v7a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6H2zm5 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+        </svg>
+      </a>
+      <a href="/modifier_livre/{{ livre.ID_LIVRE }}" class="btn-icon" title="Modifier">
+        <!-- Edit Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="white" viewBox="0 0 16 16">
+          <path d="M12.146.854a.5.5 0 0 1 .708 0l2.292 2.292a.5.5 0 0 1 0 .708L5.207 13.793 2 14l.207-3.207L12.146.854z"/>
+        </svg>
+      </a>
+      <a href="/supprimer_livre/{{ livre.ID_LIVRE }}" class="btn-icon" title="Supprimer"
          onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">
-         Supprimer
+        <!-- Trash Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="white" viewBox="0 0 16 16">
+          <path d="M5.5 5.5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0v-5a.5.5 0 0 1 .5-.5zm5 0a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0v-5a.5.5 0 0 1 .5-.5z"/>
+          <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 1 1 0-2h3.5a.5.5 0 0 1 .5.5V3h4v-.5a.5.5 0 0 1 .5-.5h3.5a1 1 0 0 1 1 1z"/>
+        </svg>
       </a>
     </div>
+    <div class="book-image-wrapper">
+      <img src="{{ url_for('static', filename= livre.PHOTO) }}" alt="{{ livre.TITRE }}">
+    </div>
+    <div class="book-title">{{ livre.TITRE }}</div>
   </div>
   {% endfor %}
 </div>
-  <div class="bottom-nav">
-    <a href="#"><i class="fas fa-home"></i></a>
-    <a href="#"><i class="fas fa-plus"></i></a>
-    <a href="#"><i class="fas fa-book-open"></i></a>
-    <a href="#"><i class="fas fa-sign-out-alt"></i></a>
-  </div>
 
+  </div>
 </body>
 </html>

@@ -2,6 +2,8 @@ from flask import Flask,render_template,request,redirect,session
 import mysql.connector
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
+import os
 
 
 app=Flask(__name__)
@@ -13,6 +15,9 @@ db=mysql.connector.connect(
     password="",
     database="bibliotheque"
 ) 
+@app.route("/",methods=["GET"])
+def index():
+ return render_template("login.html")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -25,9 +30,11 @@ def login():
         # Vérifie si l'identifiant ET le mot de passe sont corrects
         cur.execute("SELECT * FROM admin WHERE Identifiant = %s AND MOT_DE_PASSE = %s", (Identifiant, motdepasse))
         admin = cur.fetchone()
+        cur.close()
 
         if admin:
             session["admin"] = admin["IDENTIFIANT"]
+            session["admin_id"] = admin["ID_ADMIN"]
             return redirect("/dashboard")
         else:
             return render_template("login.html", erreur="Identifiant ou mot de passe incorrect")
@@ -88,10 +95,14 @@ def modifier_livre(id):
     cur.execute("SELECT * FROM livre WHERE ID_LIVRE = %s", (id,))
     livre = cur.fetchone()
     return render_template("modifier.html", livre=livre)
-@app.route("/ajouter_livre", methods=["GET", "POST"])
+@app.route("/ajouter", methods=["GET", "POST"])
 def ajouter():
     if "admin" not in session:
         return redirect("/")
+
+    cur = db.cursor(dictionary=True)
+    cur.execute("SELECT * FROM categorie")
+    categories = cur.fetchall()
 
     if request.method == "POST":
         titre = request.form.get("titre")
@@ -107,10 +118,13 @@ def ajouter():
         filename = secure_filename(photo_file.filename)
         photo_file.save(os.path.join("static", filename))
         cur = db.cursor()
+        admin_id = session.get("admin_id")
+
+
         cur.execute("""
-            INSERT INTO livre (session["admin_id"],titre, auteur, categorie, description, statu_, photo,Prix,ANNE_ECRITURE,Anne_publication)
-            VALUES (%s, %s, %s, %s, %s, %s,%s,%s,%s)
-        """, ( session["admin_id"], titre, auteur, id_categorie, description, statu_, fiename,prix,anne_ecriture,Annee_publication))
+            INSERT INTO livre (ID_ADMIN, TITRE, AUTEUR, ID_CATEGORIE, DESCRIPTION, STATU_, PHOTO, PRIX, ANNE_ECRITURE, Annee_publication)
+            VALUES (%s, %s, %s, %s, %s, %s,%s,%s,%s,%s)
+        """, ( session["admin_id"], titre, auteur, id_categorie, description, statu_, filename,prix,anne_ecriture,annee_publication))
 
         db.commit()
         return redirect("/dashboard")
@@ -136,16 +150,15 @@ def louer_livre(id):
 
 
         d1 = datetime.strptime(date_location, "%Y-%m-%d")
-       d2 = datetime.strptime(date_retour, "%Y-%m-%d")
-       nb_jours = (d2 - d1).days
-       prix_total = nb_jours * prix_location  # <-- Remplacer prix_par_jour par prix_location
-
+        d2 = datetime.strptime(date_retour, "%Y-%m-%d")
+        nb_jours = (d2 - d1).days
+        prix_total = nb_jours * prix_location  # <-- Remplacer prix_par_jour par prix_location
 
         # Assure-toi que tu stockes l'ID_ADMIN dans la session (sinon adapte ici)
-    admin_id = session.get("admin_id")  # Modifie selon ce que tu stockes
+        admin_id = session.get("admin_id")  # Modifie selon ce que tu stockes
 
         # Insérer dans la table location
-    cur.execute("""
+        cur.execute("""
          INSERT INTO location (ID_ADMIN, NOM_CLIENT, TELEPHONE, EMAIL, DATE_LOCATION, DATE_RETOUR, PRIX)
             VALUES (%s, %s, %s, %s, %s, %s, %s)
         """, (
@@ -154,10 +167,10 @@ def louer_livre(id):
         ))
 
         # Mettre à jour le statut du livre
-    cur.execute("UPDATE livre SET STATU_ = %s WHERE ID_LIVRE = %s", ("Loué", id))
+        cur.execute("UPDATE livre SET STATU_ = %s WHERE ID_LIVRE = %s", ("Loué", id))
 
-    db.commit()
-    return redirect("/dashboard")
+        db.commit()
+        return redirect("/dashboard")
 
     # Partie GET : afficher le formulaire de location
     cur.execute("SELECT * FROM livre WHERE ID_LIVRE = %s", (id,))
